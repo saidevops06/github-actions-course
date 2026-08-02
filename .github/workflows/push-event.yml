@@ -1,0 +1,17 @@
+name: Push Event 
+on: 
+    push: # push to any branch , this wil trigger the workflow
+      branches: # branch filter 
+      - main
+jobs:
+  push-demo-job:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Print Event Details
+      run: |
+        echo "Details of my workflow"
+        echo "Event Name is :       ${{ github.event_name }}"
+        echo "Reposiroty Name is:   ${{ github.repository }}"
+        echo "Branch  is :          ${{ github.ref_name }}"
+        echo "Actor is :            ${{ github.actor }}"
+        echo "Commit SHA is:        ${{ github.sha }}"
