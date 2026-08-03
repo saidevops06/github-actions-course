@@ -22,6 +22,16 @@ jobs:
                 echo "******RUnning the Tests ***********"
                 sleep 10
                 echo "** All tests completed ******"
+    test1:
+        needs: build
+        runs-on: ubuntu-latest
+        name: Test Job
+        steps:
+          - name: Run Tests
+            run: |
+                echo "******RUnning the Tests ***********"
+                sleep 10
+                echo "** All tests completed ******"
     deploy:
         needs: 
         - build
