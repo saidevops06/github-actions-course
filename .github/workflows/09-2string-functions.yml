@@ -17,3 +17,22 @@ jobs:
         - name: Use contains() in condition
           if: contains(github.repository,'sai')
           run: echo "repo contains dashboard"
+        - name: startsWith()
+          run: |
+            echo "++++++++++++++++++++++++++"
+            echo "startsWith()"
+            echo "++++++++++++++++++++++++++"
+            echo "ref_name starts with mast : ${{startsWith(github.ref_name,'mast')}}
+        - name: endsWith 
+          run: |
+            echo "++++++++++++++++++++++++++"
+            echo "endsWith()"
+            echo "++++++++++++++++++++++++++"
+            echo "repo name ends with b10 : ${{endsWith(github.repository,'b10')}}"
+            echo "===================================="
+        - name: "format()"
+          run: |
+            echo "++++++++++++++++++++++++++++"
+            echo "format()"
+            echo "****************************"
+            echo "${{format('workflow triggered by: {0} and branch is {1} also run id {2}',github.actor,github.ref_name,github.run_number)}}"
