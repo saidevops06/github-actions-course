@@ -1,6 +1,6 @@
 name: 'StatusCheck'
 on:
-    workflow_dispatch:
+ workflow_dispatch: 
 jobs:
     status_demo:
         runs-on: ubuntu-latest
