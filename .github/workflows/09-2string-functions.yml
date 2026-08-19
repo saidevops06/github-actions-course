@@ -22,7 +22,7 @@ jobs:
             echo "++++++++++++++++++++++++++"
             echo "startsWith()"
             echo "++++++++++++++++++++++++++"
-            echo "ref_name starts with mast : ${{startsWith(github.ref_name,'mast')}}
+            echo "ref_name starts with mast : ${{startsWith(github.ref_name,'mast')}}"
         - name: endsWith 
           run: |
             echo "++++++++++++++++++++++++++"
