@@ -1,6 +1,14 @@
 name: 09-1-Expressions-Operators
 on: 
     workflow_dispatch:
+        inputs: 
+            environments:
+                type: choice
+                options:
+                  - development
+                  - staging
+                  - production
+                default: development
 jobs: 
     operators-demo:
         runs-on : ubuntu-latest
@@ -21,4 +29,12 @@ jobs:
                  echo "push and  main : ${{github.event_name == 'push' && github.event_name == 'main'}}"
                  echo "push or workflow_dispatch : ${{github.event_name == 'push' || github.event_name == 'workflow_dispatch'}}"
                  echo "NOT push    : ${{!(github.event_name == 'push')}}"
-                 
+            - name : Conditional Operator
+              if : inputs.environments == 'production'
+              run: | 
+                 echo "**********PROD step is running************"
+                 echo "Conditional OPERTORS"
+                 echo "================================"
+                 echo "push and  main : ${{github.event_name == 'push' && github.event_name == 'main'}}"
+                 echo "push or workflow_dispatch : ${{github.event_name == 'push' || github.event_name == 'workflow_dispatch'}}"
+                 echo "NOT push    : ${{!(github.event_name == 'push')}}"
