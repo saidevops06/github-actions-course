@@ -1,24 +1,42 @@
 name: 09-1-Expressions-Operators
-on: 
-    workflow_dispatch:
-jobs: 
+on:
+    workflow_dispatch: 
+        inputs:
+            environment:
+                type: choice
+                options:
+                  - development
+                  - staging
+                  - production
+                default: development
+jobs:
     operators-demo:
-        runs-on : ubuntu-latest
+        runs-on: ubuntu-latest
         steps:
-            - name: Comparison Operator
-              run: | 
-                 echo "================================"
-                 echo "COMPARISION OPERTORS"
-                 echo "================================"
-                 echo "ref_name == main : ${{github.ref_name == 'main'}}"
-                 echo "ref_name != main : ${{github.ref_name != 'main'}}"
-                 echo "run_number > 0   : ${{github.run_number > 0}}"
-            - name : Logical Operator
-              run: | 
-                 echo "================================"
-                 echo "LOGICAL OPERTORS"
-                 echo "================================"
-                 echo "push and  main : ${{github.event_name == 'push' && github.event_name == 'main'}}"
-                 echo "push or workflow_dispatch : ${{github.event_name == 'push' || github.event_name == 'workflow_dispatch'}}"
-                 echo "NOT push    : ${{!(github.event_name == 'push')}}"
-                 
+            - name: Comparision Operator
+              run: |
+                echo "==============================="
+                echo "COMPARISION OPERATORS"
+                echo "==============================="
+                echo "ref_name == main : ${{ github.ref_name == 'main' }}"
+                echo "ref_name != main : ${{ github.ref_name != 'main' }}"
+                echo "run_number > 0   : ${{ github.run_number > 0 }}"
+                echo "==============================="
+            - name: Logical Operator
+              run: |
+                echo "==============================="
+                echo "LOGICAL OPERATORS"
+                echo "==============================="
+                echo "push and main : ${{ github.event_name == 'push' && github.ref_name == 'main'}}"
+                echo "push or dispatch : ${{ github.event_name == 'push' || github.event_name == 'workflow_dispatch'}}"
+                echo "NOT push :    ${{ !(github.event_name == 'push') }}"
+                echo "==============================="
+            - name: Conditional step using ==
+              if: inputs.environment == 'production'
+              run: echo "***** Production Step is running ********"
+            - name: Conditional step using !=
+              if: inputs.environment != 'production'
+              run: echo "**** Non Production step is running ******"
+            - name: Conditional Step using &&
+              if: github.event_name == 'workflow_dispatch' && inputs.environment == 'staging'
+              run: echo "*********** Manual Staging Env Deployment **************"
