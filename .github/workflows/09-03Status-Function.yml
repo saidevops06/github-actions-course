@@ -1,0 +1,27 @@
+name: 'StatusCheck'
+on:
+    workflow_dispatch:
+jobs:
+    status_demo:
+        runs-on: ubuntu-latest
+        steps:
+             - name: step 1 - Bulid
+               run: |
+                  echo  "Buliding the application..."
+                  exit 1
+             - name: step 2 - Success 
+               if: ${{ success() }}
+               run: |
+                  echo "previous steps are successful"
+             - name: step 2 - failure 
+               if: ${{ failure() }}
+               run: |
+                  echo "previous steps are failure"                
+             - name: step 4 - always 
+               if: ${{ always() }}
+               run: |
+                  echo "I will run irrespective of sucess or failure"
+             - name: step 5 - cancalled
+               if: ${{ cancelled() }}   
+               run:
+                 echo "job is cancelled"
