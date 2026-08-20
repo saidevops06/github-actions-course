@@ -19,7 +19,7 @@ jobs:
           cache: maven
 
       - name: Build and package
-        run: mvn -f app/pom.xml package -DskipTests
+        run: mvn package -DskipTests
 
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
