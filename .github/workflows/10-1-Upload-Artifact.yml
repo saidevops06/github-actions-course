@@ -1,23 +1,29 @@
 name: upload-Artifact
+
 on:
-   workflow_dispatch:
+  workflow_dispatch:
+
 jobs:
-    bulid:
-        runs-on: ubuntu-latest
-        steps:
-            - name: checkout_code
-              uses: actions/checkout@v3
-            - name: setup java 21
-              uses: actions/setup-java@v5
-              with:
-                 java-version: '21'
-                 distribution: temurin
-                 cache: maven
-            - name: build and package
-              run: mvn -f app/pom.xml package -DskipTests
-            - name: Upload bulid artifacts
-              uses: actions/upload-artifact@v4
-              with:
-                  name: build artifacts
-                  path: target/*.jar
-                  retention-days: 7
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Java 21
+        uses: actions/setup-java@v5
+        with:
+          java-version: '21'
+          distribution: temurin
+          cache: maven
+
+      - name: Build and package
+        run: mvn -f app/pom.xml package -DskipTests
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: app/target/*.jar
+          retention-days: 7
