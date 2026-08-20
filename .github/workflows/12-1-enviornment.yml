@@ -1,0 +1,36 @@
+name: Environment-Demo
+on:
+    workflow_dispatch:
+jobs:
+    deploy-dev:
+          name: Depolyment to dev
+          runs-on: ubuntu-latest
+          environment:
+            name: development
+            url: https://dev.i27academy.com
+          steps: 
+            - run: |
+                echo "depolying to dev environment"
+
+
+    deploy-staging:
+          name: Depolyment to stage
+          runs-on: ubuntu-latest
+          needs: deploy-dev
+          environment:
+            name: staging
+            url: https://stage.i27academy.com
+          steps: 
+            - run: |
+                echo "depolying to stage environment"
+
+    deploy-production:
+          name: Depolyment to Prod
+          runs-on: ubuntu-latest
+          needs: deploy-staging
+          environment:
+            name: production
+            url: https://i27academy.com
+          steps: 
+            - run: |
+                echo "depolying to prod environment"
