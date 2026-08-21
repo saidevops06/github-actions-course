@@ -23,6 +23,11 @@ jobs:
           steps: 
             - run: |
                 echo "depolying to stage environment"
+                echo " ========================="
+                echo "Stging environment variables"
+                echo "STAGE_DB_URL : ${{ vars.STAGE_DB_URL }}"
+                echo "+++++++++++++++++++++++"
+
 
     deploy-production:
           name: Depolyment to Prod
@@ -34,3 +39,7 @@ jobs:
           steps: 
             - run: |
                 echo "depolying to prod environment"
+                echo " ========================="
+                echo "Prod environment variables"
+                echo "PROD_DB_URL : ${{ vars.PROD_DB_URL }}"
+                echo "+++++++++++++++++++++++"
