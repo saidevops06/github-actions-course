@@ -11,6 +11,10 @@ jobs:
           steps: 
             - run: |
                 echo "depolying to dev environment"
+                echo " ========================="
+                echo "Stging environment variables"
+                echo "STAGE_DB_URL : ${{ vars.APP_NAME }}"
+                echo "+++++++++++++++++++++++"
 
 
     deploy-staging:
